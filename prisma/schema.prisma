@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  category    String
+  deadline    DateTime?  // For timed tasks
+  predictedTime Int?     // For timed tasks (in minutes)
+  dateToFinish DateTime? // For pomodoro tasks
+  cycles      Int?       // For pomodoro tasks
+  workTime    Int?       // For pomodoro tasks (in minutes)
+  breakTime   Int?       // For pomodoro tasks (in minutes)
+  createdAt   DateTime @default(now())
+}
