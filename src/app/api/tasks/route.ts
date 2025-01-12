@@ -2,11 +2,6 @@ import { NextResponse } from "next/server";
 import prisma from '@/lib/prisma';
 import { InvalidEvent } from "react";
 
-const tasks = [
-    {id: 1, name: "Task 1", description: "This is the first task"},
-    {id: 2, name: "Task 2", description: "This is the second task"}
-];
-
 export async function GET(){
     const tasks = await prisma.task.findMany();
     return NextResponse.json(tasks);
